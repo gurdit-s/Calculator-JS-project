@@ -1,26 +1,19 @@
-let input = document.querySelector('.input');
-let buttons = document.querySelectorAll('.button')
-
-buttons.forEach(button => {
-    button.addEventListener('click', () =>{
-    let buttonText = button.textContent;
-    if (buttonText === '='){
-        try{
-            let result = eval(input.value);
-            input.value = result;
-        }
-    catch (error){
-        input.error = 'Error';
+let string = "";
+let buttons = document.querySelectorAll('.button');
+Array.from(buttons).forEach((button)=>{
+  button.addEventListener('click', (e)=>{
+    if(e.target.innerHTML == '='){
+      string = eval(string);
+      document.querySelector('input').value = string;
     }
-    }else if (buttonText === 'C') {
-        input.value = '';
-    }else if (buttonText === '+/-') {
-        // Toggle positive/negative value
-        if (input.value !== '') {
-          input.value = parseFloat(input.value) * -1;
-        }
-    }else{
-        input.value += buttonText;
+    else if(e.target.innerHTML == 'C'){
+      string = ""
+      document.querySelector('input').value = string;
     }
-})
+    else{ 
+    console.log(e.target)
+    string = string + e.target.innerHTML;
+    document.querySelector('input').value = string;
+      }
+  })
 })
